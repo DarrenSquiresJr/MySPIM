@@ -1,0 +1,3 @@
+C:/Users/firen/CLionProjects/MySPIM/cmake-build-debug/CMakeFiles/MySPIM.dir
+C:/Users/firen/CLionProjects/MySPIM/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/firen/CLionProjects/MySPIM/cmake-build-debug/CMakeFiles/rebuild_cache.dir
