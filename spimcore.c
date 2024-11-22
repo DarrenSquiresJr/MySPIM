@@ -349,48 +349,62 @@ void Loop(void)
     }
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    const char *input_file = "C:\\Users\\firen\\CLionProjects\\MySPIM\\input_file.asc"; // Hardcoded input file
-    FILE *FP;
+    int i;
     unsigned long t;
 
-    // Open the input file
-    if ((FP = fopen(input_file, "r")) == NULL)
+    setvbuf(stdout, (char *) NULL, _IOLBF, 0);
+    if (argc != 2 && argc != 3)
     {
-        fprintf(stderr, "Error: Cannot open input file %s\n", input_file);
+        fprintf(stderr, "syntax: %s input_file [-r]\n", argv[0]);
         return 1;
     }
-
+    if (*argv[1] == '-')
+    {
+        fprintf(stderr, "syntax: %s input_file [-r]\n", argv[0]);
+        return 1;
+    }
+    if ((FP = fopen(argv[1], "r")) == NULL)
+    {
+        fprintf(stderr, "%s: cannot open input file %s\n", argv[0], argv[1]);
+        return 1;
+    }
+    if (argc == 3)
+    {
+        if (strcmp(argv[2], "-r") == 0)
+        {
+            Redir = (char *) RedirPrefix;
+            fprintf(stdout, "%s\n", argv[0]);
+        }
+        else
+        {
+            fprintf(stderr, "syntax: %s input_file [-r]\n", argv[0]);
+            return 1;
+        }
+    }
     memset(Mem, 0, MEMSIZE * sizeof(unsigned));
-
-    // Load instructions into memory
-    for (unsigned i = PCINIT; !feof(FP); i += 4)
+    for (i = PCINIT; !feof(FP); i += 4)
     {
         if (fgets(Buf, BUFSIZE, FP) == NULL)
         {
             if (feof(FP))
                 break;
-            fprintf(stderr, "Error: File reading error\n");
-            fclose(FP);
+            fprintf(stderr, "%s: file %s reading error\n", argv[0], argv[1]);
             return 1;
         }
         if (sscanf(Buf, "%lx", &t) != 1)
         {
-            fprintf(stderr, "Error: Invalid line in input file, continuing...\n");
+            fprintf(stderr, "%s: file %s error in line %d, continue...\n",
+                    argv[0], argv[1], i - PCINIT + 1);
             MEM(i) = 0;
         }
         else
         {
-            MEM(i) = strtoul(Buf, NULL, 16);
+            MEM(i) = strtoul(Buf, (char **) NULL, 16);
         }
     }
-
-    fclose(FP);
-
-    // Start the simulator loop
     Loop();
-
+    fclose(FP);
     return 0;
 }
-

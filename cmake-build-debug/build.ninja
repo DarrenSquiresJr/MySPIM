@@ -49,17 +49,15 @@ cmake_ninja_workdir = C$:/Users/firen/CLionProjects/MySPIM/cmake-build-debug/
 
 build cmake_object_order_depends_target_MySPIM: phony || CMakeFiles/MySPIM.dir
 
-build CMakeFiles/MySPIM.dir/spimcore.c.obj: C_COMPILER__MySPIM_unscanned_Debug C$:/Users/firen/CLionProjects/MySPIM/spimcore.c || cmake_object_order_depends_target_MySPIM
-  DEP_FILE = CMakeFiles\MySPIM.dir\spimcore.c.obj.d
-  FLAGS = -g -std=gnu99 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/firen/CLionProjects/MySPIM
-  OBJECT_DIR = CMakeFiles\MySPIM.dir
-  OBJECT_FILE_DIR = CMakeFiles\MySPIM.dir
-
 build CMakeFiles/MySPIM.dir/project.c.obj: C_COMPILER__MySPIM_unscanned_Debug C$:/Users/firen/CLionProjects/MySPIM/project.c || cmake_object_order_depends_target_MySPIM
   DEP_FILE = CMakeFiles\MySPIM.dir\project.c.obj.d
   FLAGS = -g -std=gnu99 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/firen/CLionProjects/MySPIM
+  OBJECT_DIR = CMakeFiles\MySPIM.dir
+  OBJECT_FILE_DIR = CMakeFiles\MySPIM.dir
+
+build CMakeFiles/MySPIM.dir/spimcore.c.obj: C_COMPILER__MySPIM_unscanned_Debug C$:/Users/firen/CLionProjects/MySPIM/spimcore.c || cmake_object_order_depends_target_MySPIM
+  DEP_FILE = CMakeFiles\MySPIM.dir\spimcore.c.obj.d
+  FLAGS = -g -std=gnu99 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\MySPIM.dir
   OBJECT_FILE_DIR = CMakeFiles\MySPIM.dir
 
@@ -71,9 +69,8 @@ build CMakeFiles/MySPIM.dir/project.c.obj: C_COMPILER__MySPIM_unscanned_Debug C$
 #############################################
 # Link the executable MySPIM.exe
 
-build MySPIM.exe: C_EXECUTABLE_LINKER__MySPIM_Debug CMakeFiles/MySPIM.dir/spimcore.c.obj CMakeFiles/MySPIM.dir/project.c.obj
+build MySPIM.exe: C_EXECUTABLE_LINKER__MySPIM_Debug CMakeFiles/MySPIM.dir/project.c.obj CMakeFiles/MySPIM.dir/spimcore.c.obj
   FLAGS = -g
-  LINK_FLAGS = -Wl,-subsystem,console
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MySPIM.dir
   POST_BUILD = cd .
